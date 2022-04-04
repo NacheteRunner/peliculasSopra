@@ -82,6 +82,23 @@ public class PelisController {
 
 
     }
+    @RequestMapping(value="/listarPeliculas", params = "texto", method= RequestMethod.GET)
+    public Object consultarPorTexto(@RequestParam("texto")String texto){
+
+        List<Pelicula> peliculasBusqueda = pelisServicio.findPeliculaByTexto(texto);
+        if(!peliculasBusqueda.isEmpty()){
+
+            return new ResponseEntity<List<Pelicula>>(peliculasBusqueda, HttpStatus.OK);
+
+        }else{
+            String error = "No existe ninguna pelicula buscando el termino:  "+ texto;
+            System.out.println(error);
+            return error;
+        }
+
+
+
+    }
 
 }
 

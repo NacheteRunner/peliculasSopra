@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.scaffolding.scaffolding.repositorios.PelisRepositorio;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service("PelisServicio")
 public class PelisServicio {
@@ -35,13 +33,19 @@ public class PelisServicio {
 
     // BUSCAR POR TERMINO EN CUALQUIER CAMPO
     public List<Pelicula> findPeliculaByTexto (String texto){
+        List<Pelicula> encontradas = new ArrayList<>();
         List<Pelicula> peliculas = listarPeliculas();
-        String patron = "%"+texto+"%";
+        String patron = texto.toLowerCase();
         for (Pelicula peli : peliculas) {
-
+            if(peli.getTitulo().toLowerCase().contains(patron)||
+               peli.getActores().toLowerCase().contains(patron)||
+               peli.getGenero().toLowerCase().contains(patron)||
+               String.valueOf(peli.getAnno()).equalsIgnoreCase(patron)){
+                    encontradas.add(peli);
+            }
 
         }
-        return peliculas;
+        return encontradas;
     }
 
 
