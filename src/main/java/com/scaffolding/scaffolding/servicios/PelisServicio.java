@@ -1,54 +1,17 @@
 package com.scaffolding.scaffolding.servicios;
 
-import com.scaffolding.scaffolding.modelo.Pelicula;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import com.scaffolding.scaffolding.repositorios.PelisRepositorio;
+import com.scaffolding.scaffolding.modelo.PeliculaDTO;
+import com.scaffolding.scaffolding.modelo.PeliculaEntity;
+import com.scaffolding.scaffolding.modelo.PeliculaResponse;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
-@Service("PelisServicio")
-public class PelisServicio {
-    @Autowired
+public interface PelisServicio {
 
-    private PelisRepositorio pelisRepositorio;
-
-    // METODO INSERTAR
-    public void addPelicula (Pelicula pelicula) {
-        pelisRepositorio.save(pelicula);
-    }
-
-    // LISTAR PELICULAS
-    public List<Pelicula> listarPeliculas(){
-        return pelisRepositorio.findAll();
-    }
-
-    // BUSCAR POR ID
-    public Optional<Pelicula> listarPeliculaPorId(int id) { return pelisRepositorio.findById(id); }
-
-    // BUSCAR POR NOMBRE
-    public List<Pelicula> findPeliculaByName (String titulo) {
-        return pelisRepositorio.findByTitulo(titulo);
-    }
-
-    // BUSCAR POR TERMINO EN CUALQUIER CAMPO
-    public List<Pelicula> findPeliculaByTexto (String texto){
-        List<Pelicula> encontradas = new ArrayList<>();
-        List<Pelicula> peliculas = listarPeliculas();
-        String patron = texto.toLowerCase();
-        for (Pelicula peli : peliculas) {
-            if(peli.getTitulo().toLowerCase().contains(patron)||
-               peli.getActores().toLowerCase().contains(patron)||
-               peli.getGenero().toLowerCase().contains(patron)||
-               String.valueOf(peli.getAnno()).equalsIgnoreCase(patron)){
-                    encontradas.add(peli);
-            }
-
-        }
-        return encontradas;
-    }
-
-
-
+    public PeliculaResponse addPelicula (PeliculaDTO peliculaDTO);
+    public List<PeliculaResponse> listarPeliculas();
+    public PeliculaResponse listarPeliculaPorId(int id);
+    public List<PeliculaResponse> findPeliculaByName (String titulo);
+    public List<PeliculaResponse> findPeliculaByTexto (String texto);
 }
-

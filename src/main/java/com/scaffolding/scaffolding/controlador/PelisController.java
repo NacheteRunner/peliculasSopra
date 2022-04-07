@@ -1,16 +1,17 @@
 package com.scaffolding.scaffolding.controlador;
 
-import com.scaffolding.scaffolding.modelo.Pelicula;
-import com.scaffolding.scaffolding.servicios.PelisServicio;
+import com.scaffolding.scaffolding.modelo.PeliculaDTO;
+import com.scaffolding.scaffolding.modelo.PeliculaEntity;
+import com.scaffolding.scaffolding.modelo.PeliculaResponse;
+import com.scaffolding.scaffolding.servicios.PelisServicioImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -18,86 +19,41 @@ import java.util.Optional;
                     // Just return a POJO and jackson serializer will take care of converting to json.
                     // It is equivalent to using @ResponseBody when used with @Controller.
                     // Rather than placing @ResponseBody on every controller method we place @RestController instead of vanilla @Controller and @ResponseBody by default is applied on all resources in that controller.
-
+@RequestMapping("/")
 public class PelisController {
 
     @Autowired
 
-    private PelisServicio pelisServicio;
+    private PelisServicioImpl pelisServicioImpl;
 
-
-    @RequestMapping(value="/listarPeliculas",method= RequestMethod.GET)
-    public Object listarPeliculas(){
-        List<Pelicula> peliculas = pelisServicio.listarPeliculas();
-        if (!peliculas.isEmpty()){
-            return peliculas;
-        }else{
-            String error = "Todavia no se ha insertado ninguna pelicula";
-            System.out.println(error);
-            return error;
-        }
-
-        // return new ResponseEntity<List<Pelicula>>(pelisServicio.listarPeliculas(), HttpStatus.OK);
+    @GetMapping(value="listarPeliculas")
+    public ResponseEntity<List<PeliculaResponse>> listarPeliculas(){
+       List<PeliculaResponse> peliculas = pelisServicioImpl.listarPeliculas();
+        return new ResponseEntity<List<PeliculaResponse>>(peliculas, HttpStatus.OK);
     }
 
-
-
-    @RequestMapping(value="/listarPeliculas",params = "id", method= RequestMethod.GET)
-    public Object consultarPorId(@RequestParam("id")int id){
-        Optional<Pelicula> pelicula = pelisServicio.listarPeliculaPorId(id);
-        if(pelicula.isPresent()){
-            return new ResponseEntity<>(pelicula, HttpStatus.OK);
-        }
-        else{
-            String error = "No exisste la pelicula con id "+ id;
-            System.out.println(error);
-            return error;
-
-        }
+    @RequestMapping(value="listarPeliculas",params = "id", method= RequestMethod.GET)
+    public ResponseEntity<PeliculaResponse> consultarPorId(@RequestParam("id")int id){
+        PeliculaResponse peliculaResponse = pelisServicioImpl.listarPeliculaPorId(id);
+        return new ResponseEntity<PeliculaResponse>(peliculaResponse, HttpStatus.OK);
     }
 
-    @RequestMapping(value="/insertarPelicula",method= RequestMethod.POST)
-    public ResponseEntity<Object> insertarPelicula (@RequestBody Pelicula peliculaAInsertar){
-        pelisServicio.addPelicula(peliculaAInsertar);
-        String correcto = "La pelicula ha sido insertada correctamente";
-        return new ResponseEntity<Object> (correcto, HttpStatus.OK);
-
-
+    @RequestMapping(value="insertarPelicula",method= RequestMethod.POST)
+    public ResponseEntity<PeliculaResponse> insertarPelicula (@RequestBody PeliculaDTO peliculaDTOInsertar){
+        PeliculaResponse peliculaResponse= pelisServicioImpl.addPelicula(peliculaDTOInsertar);
+        return new ResponseEntity<PeliculaResponse> (peliculaResponse, HttpStatus.OK);
     }
 
     @RequestMapping(value="/listarPeliculas", params = "titulo", method= RequestMethod.GET)
-    public Object consultarPorNombre(@RequestParam("titulo")String titulo){
-
-            List<Pelicula> peliculasBusqueda = pelisServicio.findPeliculaByName(titulo);
-            if(!peliculasBusqueda.isEmpty()){
-
-                return new ResponseEntity<List<Pelicula>>(peliculasBusqueda, HttpStatus.OK);
-
-            }else{
-                String error = "No exisste la pelicula de titulo "+ titulo;
-                System.out.println(error);
-                return error;
-            }
-
-
-
+    public ResponseEntity<List<PeliculaResponse>> consultarPorNombre(@RequestParam("titulo")String titulo){
+        List<PeliculaResponse> peliculas = pelisServicioImpl.findPeliculaByName(titulo);
+        return new ResponseEntity<List<PeliculaResponse>>(peliculas, HttpStatus.OK);
     }
+
     @RequestMapping(value="/listarPeliculas", params = "texto", method= RequestMethod.GET)
-    public Object consultarPorTexto(@RequestParam("texto")String texto){
-
-        List<Pelicula> peliculasBusqueda = pelisServicio.findPeliculaByTexto(texto);
-        if(!peliculasBusqueda.isEmpty()){
-
-            return new ResponseEntity<List<Pelicula>>(peliculasBusqueda, HttpStatus.OK);
-
-        }else{
-            String error = "No existe ninguna pelicula buscando el termino:  "+ texto;
-            System.out.println(error);
-            return error;
-        }
-
-
-
+    public ResponseEntity<List<PeliculaResponse>> consultarPorTexto(@RequestParam("texto")String texto){
+        List<PeliculaResponse> peliculas = pelisServicioImpl.findPeliculaByTexto(texto);
+        return new ResponseEntity<List<PeliculaResponse>>(peliculas, HttpStatus.OK);
     }
 
 }

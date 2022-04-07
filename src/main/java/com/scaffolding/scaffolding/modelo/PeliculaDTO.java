@@ -1,36 +1,28 @@
 package com.scaffolding.scaffolding.modelo;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import java.io.Serializable;
 
-@Entity
-@Table(name="peliculasDB")
+public class PeliculaDTO implements Serializable {
+    // En principio estamos trabajando solo con una entidad, quedaria la clase igual
 
-public class Pelicula {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
     private int id;
 
-    @Column(name = "titulo", nullable = false)
     private String titulo;
 
-    @Column(name = "genero", nullable = false)
     private String genero;
 
-    @Column(name = "anno", nullable = false)
     private int anno;
 
-    @Column(name = "num_oscar", nullable = true)
     private int num_oscar;
 
-    @Column(name = "actores", nullable = false)
     private String actores;
 
-    public Pelicula(){
+    public PeliculaDTO(){
 
     }
 
-    public Pelicula(String titulo, String genero, int anno, int num_oscar, String actores) {
+    public PeliculaDTO(String titulo, String genero, int anno, int num_oscar, String actores) {
         this.titulo = titulo;
         this.genero = genero;
         this.anno = anno;
@@ -88,7 +80,7 @@ public class Pelicula {
 
     @Override
     public String toString() {
-        return "Pelicula{" +
+        return "PeliculaDTO{" +
                 "id=" + id +
                 ", titulo='" + titulo + '\'' +
                 ", genero='" + genero + '\'' +
@@ -98,4 +90,3 @@ public class Pelicula {
                 '}';
     }
 }
-
