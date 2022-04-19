@@ -5,6 +5,7 @@ import com.scaffolding.scaffolding.modelo.PeliculaEntity;
 import com.scaffolding.scaffolding.modelo.PeliculaResponse;
 import com.scaffolding.scaffolding.servicios.PelisServicioImpl;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,8 @@ public class PelisController {
 
     private PelisServicioImpl pelisServicioImpl;
 
+    @Operation(summary = "Ver peliculas", description = "Sin parametros muestra un listado de todas las peliculas de la base de datos, o busca por titulo, " +
+            "id, o un texto determinado en cualquier campo de la pelicula ", method = "GET")
     @GetMapping(value="listarPeliculas")
     public ResponseEntity<List<PeliculaResponse>> listarPeliculas(){
        List<PeliculaResponse> peliculas = pelisServicioImpl.listarPeliculas();
@@ -33,11 +36,12 @@ public class PelisController {
     }
 
     @RequestMapping(value="listarPeliculas",params = "id", method= RequestMethod.GET)
-    public ResponseEntity<PeliculaResponse> consultarPorId(@RequestParam("id")int id){
+    public ResponseEntity<PeliculaResponse> consultarPorId(@RequestParam(required = false)int id){
         PeliculaResponse peliculaResponse = pelisServicioImpl.listarPeliculaPorId(id);
         return new ResponseEntity<PeliculaResponse>(peliculaResponse, HttpStatus.OK);
     }
 
+    @Operation(summary = "Insertar película", description = "Inserta una pelicula en la base de datos", method = "POST")
     @RequestMapping(value="insertarPelicula",method= RequestMethod.POST)
     public ResponseEntity<PeliculaResponse> insertarPelicula (@RequestBody PeliculaDTO peliculaDTOInsertar){
         PeliculaResponse peliculaResponse= pelisServicioImpl.addPelicula(peliculaDTOInsertar);
@@ -45,13 +49,13 @@ public class PelisController {
     }
 
     @RequestMapping(value="/listarPeliculas", params = "titulo", method= RequestMethod.GET)
-    public ResponseEntity<List<PeliculaResponse>> consultarPorNombre(@RequestParam("titulo")String titulo){
+    public ResponseEntity<List<PeliculaResponse>> consultarPorNombre(@RequestParam(required = false)String titulo){
         List<PeliculaResponse> peliculas = pelisServicioImpl.findPeliculaByName(titulo);
         return new ResponseEntity<List<PeliculaResponse>>(peliculas, HttpStatus.OK);
     }
 
     @RequestMapping(value="/listarPeliculas", params = "texto", method= RequestMethod.GET)
-    public ResponseEntity<List<PeliculaResponse>> consultarPorTexto(@RequestParam("texto")String texto){
+    public ResponseEntity<List<PeliculaResponse>> consultarPorTexto(@RequestParam(required = false)String texto){
         List<PeliculaResponse> peliculas = pelisServicioImpl.findPeliculaByTexto(texto);
         return new ResponseEntity<List<PeliculaResponse>>(peliculas, HttpStatus.OK);
     }

@@ -13,6 +13,7 @@ import java.util.*;
 
 @Service("PelisServicioImpl")
 public class PelisServicioImpl implements PelisServicio {
+
     @Autowired
 
     private PelisRepositorio pelisRepositorio;
@@ -104,7 +105,7 @@ public class PelisServicioImpl implements PelisServicio {
                 peliculasResponse.add(peliculaResponse);
             }
         }else{
-            String error = "No existe ninguna pelicula buscando el termino:  "+ texto;
+            String error = "No existe ninguna pelicula buscando el termino: "+ texto;
             System.out.println(error);
             PeliculaResponse peliculaResponse = new PeliculaResponse();
             peliculaResponse.setTitulo(error);
@@ -127,7 +128,7 @@ public class PelisServicioImpl implements PelisServicio {
 
     public PeliculaEntity convertDTOToEntity(PeliculaDTO peliculaDTO){
         PeliculaEntity PeliculaEntity = new PeliculaEntity();
-        PeliculaEntity.setId(peliculaDTO.getId());
+        //PeliculaEntity.setId(peliculaDTO.getId());
         PeliculaEntity.setTitulo(peliculaDTO.getTitulo());
         PeliculaEntity.setGenero(peliculaDTO.getGenero());
         PeliculaEntity.setAnno(peliculaDTO.getAnno());

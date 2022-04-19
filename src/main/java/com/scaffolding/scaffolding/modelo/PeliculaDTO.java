@@ -6,7 +6,7 @@ import java.io.Serializable;
 public class PeliculaDTO implements Serializable {
     // En principio estamos trabajando solo con una entidad, quedaria la clase igual
 
-    private int id;
+    //private int id;
 
     private String titulo;
 
@@ -34,13 +34,13 @@ public class PeliculaDTO implements Serializable {
         return titulo;
     }
 
-    public int getId() {
+    /*public int getId() {
         return id;
-    }
+    }*/
 
-    public void setId(int id) {
+    /*public void setId(int id) {
         this.id = id;
-    }
+    }*/
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
@@ -81,7 +81,7 @@ public class PeliculaDTO implements Serializable {
     @Override
     public String toString() {
         return "PeliculaDTO{" +
-                "id=" + id +
+                //"id=" + id +
                 ", titulo='" + titulo + '\'' +
                 ", genero='" + genero + '\'' +
                 ", anno=" + anno +
