@@ -23,8 +23,8 @@ public class MovieEntity {
     @Column(name = "anno", nullable = false)
     private int anno;
 
-    @Column(name = "num_oscar", nullable = true)
-    private int num_oscar;
+    @Column(name = "numOscar", nullable = true)
+    private int numOscar;
 
     @Column(name = "actores", nullable = false)
     private String actores;
@@ -33,11 +33,11 @@ public class MovieEntity {
 
     }
 
-    public MovieEntity(String titulo, String genero, int anno, int num_oscar, String actores) {
+    public MovieEntity(String titulo, String genero, int anno, int numOscar, String actores) {
         this.titulo = titulo;
         this.genero = genero;
         this.anno = anno;
-        this.num_oscar = num_oscar;
+        this.numOscar = numOscar;
         this.actores = actores;
     }
 
@@ -73,12 +73,12 @@ public class MovieEntity {
         this.anno = anno;
     }
 
-    public int getNum_oscar() {
-        return num_oscar;
+    public int getnumOscar() {
+        return numOscar;
     }
 
-    public void setNum_oscar(int num_oscar) {
-        this.num_oscar = num_oscar;
+    public void setnumOscar(int numOscar) {
+        this.numOscar = numOscar;
     }
 
     public String getActores() {
@@ -96,7 +96,7 @@ public class MovieEntity {
                 ", titulo='" + titulo + '\'' +
                 ", genero='" + genero + '\'' +
                 ", anno=" + anno +
-                ", num_oscar=" + num_oscar +
+                ", numOscar=" + numOscar +
                 ", actores='" + actores + '\'' +
                 '}';
     }

@@ -13,14 +13,17 @@ public class MovieDTO implements Serializable {
     @NotEmpty
     @NotBlank
     private String titulo;
+
     @NotEmpty
     @NotBlank
     private String genero;
+
     @NotNull
     @Min(1800)
     private int anno;
 
-    private int num_oscar;
+    private int numOscar;
+
     @NotEmpty
     @NotBlank
     private String actores;
@@ -29,11 +32,11 @@ public class MovieDTO implements Serializable {
 
     }
 
-    public MovieDTO(String titulo, String genero, int anno, int num_oscar, String actores) {
+    public MovieDTO(String titulo, String genero, int anno, int numOscar, String actores) {
         this.titulo = titulo;
         this.genero = genero;
         this.anno = anno;
-        this.num_oscar = num_oscar;
+        this.numOscar = numOscar;
         this.actores = actores;
     }
 
@@ -61,12 +64,12 @@ public class MovieDTO implements Serializable {
         this.anno = anno;
     }
 
-    public int getNum_oscar() {
-        return num_oscar;
+    public int getnumOscar() {
+        return numOscar;
     }
 
-    public void setNum_oscar(int num_oscar) {
-        this.num_oscar = num_oscar;
+    public void setnumOscar(int numOscar) {
+        this.numOscar = numOscar;
     }
 
     public String getActores() {
@@ -84,7 +87,7 @@ public class MovieDTO implements Serializable {
                 ", titulo='" + titulo + '\'' +
                 ", genero='" + genero + '\'' +
                 ", anno=" + anno +
-                ", num_oscar=" + num_oscar +
+                ", numOscar=" + numOscar +
                 ", actores='" + actores + '\'' +
                 '}';
     }

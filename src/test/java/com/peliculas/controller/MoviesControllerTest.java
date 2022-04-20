@@ -75,7 +75,7 @@ class MoviesControllerTest {
         movie.setAnno(2021);
         movie.setGenero("CienciaFicción");
         movie.setActores("Harrison Ford, y otros");
-        movie.setNum_oscar(2);
+        movie.setnumOscar(2);
         return movie;
     }
 

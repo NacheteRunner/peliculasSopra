@@ -119,7 +119,7 @@ public class MoviesServiceImpl implements MoviesService {
         movieResponse.setTitulo(movieEntity.getTitulo());
         movieResponse.setGenero(movieEntity.getGenero());
         movieResponse.setAnno(movieEntity.getAnno());
-        movieResponse.setNum_oscar(movieEntity.getNum_oscar());
+        movieResponse.setnumOscar(movieEntity.getnumOscar());
         movieResponse.setActores(movieEntity.getActores());
         return movieResponse;
     }
@@ -129,7 +129,7 @@ public class MoviesServiceImpl implements MoviesService {
         MovieEntity.setTitulo(movieDTO.getTitulo());
         MovieEntity.setGenero(movieDTO.getGenero());
         MovieEntity.setAnno(movieDTO.getAnno());
-        MovieEntity.setNum_oscar(movieDTO.getNum_oscar());
+        MovieEntity.setnumOscar(movieDTO.getnumOscar());
         MovieEntity.setActores(movieDTO.getActores());
         return MovieEntity;
     }
