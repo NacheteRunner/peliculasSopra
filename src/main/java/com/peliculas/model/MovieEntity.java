@@ -1,36 +1,39 @@
-package com.peliculas.modelo;
+package com.peliculas.model;
 
-import javax.persistence.Column;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
+import javax.persistence.*;
 
-public class PeliculaDTO implements Serializable {
-    // En principio estamos trabajando solo con una entidad, quedaria la clase igual
+@Entity
+@Table(name="peliculasDB")
+/*@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Slf4j*/
+public class MovieEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private int id;
 
-
-    @NotEmpty
-    @NotBlank
+    @Column(name = "titulo", nullable = false)
     private String titulo;
-    @NotEmpty
-    @NotBlank
+
+    @Column(name = "genero", nullable = false)
     private String genero;
-    @NotNull
-    @Min(1800)
+
+    @Column(name = "anno", nullable = false)
     private int anno;
 
+    @Column(name = "num_oscar", nullable = true)
     private int num_oscar;
-    @NotEmpty
-    @NotBlank
+
+    @Column(name = "actores", nullable = false)
     private String actores;
 
-    public PeliculaDTO(){
+    public MovieEntity(){
 
     }
 
-    public PeliculaDTO(String titulo, String genero, int anno, int num_oscar, String actores) {
+    public MovieEntity(String titulo, String genero, int anno, int num_oscar, String actores) {
         this.titulo = titulo;
         this.genero = genero;
         this.anno = anno;
@@ -40,6 +43,14 @@ public class PeliculaDTO implements Serializable {
 
     public String getTitulo() {
         return titulo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setTitulo(String titulo) {
@@ -80,8 +91,8 @@ public class PeliculaDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "PeliculaDTO{" +
-                //"id=" + id +
+        return "Pelicula{" +
+                "id=" + id +
                 ", titulo='" + titulo + '\'' +
                 ", genero='" + genero + '\'' +
                 ", anno=" + anno +
@@ -90,3 +101,4 @@ public class PeliculaDTO implements Serializable {
                 '}';
     }
 }
+

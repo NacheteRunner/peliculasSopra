@@ -1,44 +1,24 @@
-package com.peliculas.modelo;
+package com.peliculas.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+public class MovieResponse {
 
-import javax.persistence.*;
-
-@Entity
-@Table(name="peliculasDB")
-/*@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Slf4j*/
-public class PeliculaEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
     private int id;
 
-    @Column(name = "titulo", nullable = false)
     private String titulo;
 
-    @Column(name = "genero", nullable = false)
     private String genero;
 
-    @Column(name = "anno", nullable = false)
     private int anno;
 
-    @Column(name = "num_oscar", nullable = true)
     private int num_oscar;
 
-    @Column(name = "actores", nullable = false)
     private String actores;
 
-    public PeliculaEntity(){
+    public MovieResponse(){
 
     }
 
-    public PeliculaEntity(String titulo, String genero, int anno, int num_oscar, String actores) {
+    public MovieResponse(String titulo, String genero, int anno, int num_oscar, String actores) {
         this.titulo = titulo;
         this.genero = genero;
         this.anno = anno;
@@ -96,7 +76,7 @@ public class PeliculaEntity {
 
     @Override
     public String toString() {
-        return "Pelicula{" +
+        return "PeliculaResponse{" +
                 "id=" + id +
                 ", titulo='" + titulo + '\'' +
                 ", genero='" + genero + '\'' +
@@ -106,4 +86,3 @@ public class PeliculaEntity {
                 '}';
     }
 }
-

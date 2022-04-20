@@ -1,8 +1,8 @@
-package com.peliculas.controlador;
+package com.peliculas.controller;
 
-import com.peliculas.modelo.PeliculaDTO;
-import com.peliculas.modelo.PeliculaResponse;
-import com.peliculas.servicios.PelisServicioImpl;
+import com.peliculas.model.MovieDTO;
+import com.peliculas.model.MovieResponse;
+import com.peliculas.services.MoviesServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,43 +22,43 @@ import java.util.List;
                     // Rather than placing @ResponseBody on every controller method we place @RestController instead of vanilla @Controller and @ResponseBody by default is applied on all resources in that controller.
 @Validated        //https://www.yawintutor.com/how-to-validate-request-body-in-spring-boot/
 @RequestMapping("/peliculas")
-public class PelisController {
+public class MoviesController {
 
     @Autowired
 
-    private PelisServicioImpl pelisServicioImpl;
+    private MoviesServiceImpl pelisServicioImpl;
 
     @Operation(summary = "Ver peliculas", description = "Sin parametros muestra un listado de todas las peliculas de la base de datos, o busca por titulo, " +
             "id, o un texto determinado en cualquier campo de la pelicula ", method = "GET")
     @GetMapping(value="/listar")
-    public ResponseEntity<List<PeliculaResponse>> listarPeliculas(){
-       List<PeliculaResponse> peliculas = pelisServicioImpl.listarPeliculas();
-        return new ResponseEntity<List<PeliculaResponse>>(peliculas, HttpStatus.OK);
+    public ResponseEntity<List<MovieResponse>> readMovies(){
+       List<MovieResponse> peliculas = pelisServicioImpl.readMovies();
+        return new ResponseEntity<List<MovieResponse>>(peliculas, HttpStatus.OK);
     }
 
     @GetMapping(value="/buscarPorId/{id}")
-    public ResponseEntity<PeliculaResponse> consultarPorId(@PathVariable("id") int id){
-        PeliculaResponse peliculaResponse = pelisServicioImpl.listarPeliculaPorId(id);
-        return new ResponseEntity<PeliculaResponse>(peliculaResponse, HttpStatus.OK);
+    public ResponseEntity<MovieResponse> findMoviesById(@PathVariable("id") int id){
+        MovieResponse movieResponse = pelisServicioImpl.findMoviesById(id);
+        return new ResponseEntity<MovieResponse>(movieResponse, HttpStatus.OK);
     }
 
     @Operation(summary = "Insertar película", description = "Inserta una pelicula en la base de datos", method = "POST")
     @PostMapping(value="/insertar")
-    public ResponseEntity<PeliculaResponse> insertarPelicula (@Valid @RequestBody PeliculaDTO peliculaDTOInsertar){
-        PeliculaResponse peliculaResponse= pelisServicioImpl.addPelicula(peliculaDTOInsertar);
-        return ResponseEntity.ok(peliculaResponse);
+    public ResponseEntity<MovieResponse> addMovie (@Valid @RequestBody MovieDTO movieDTOInsertar){
+        MovieResponse movieResponse = pelisServicioImpl.addMovie(movieDTOInsertar);
+        return ResponseEntity.ok(movieResponse);
     }
 
     @GetMapping(value="/buscarPorTitulo/{titulo}")
-    public ResponseEntity<List<PeliculaResponse>> consultarPorNombre(@PathVariable("titulo") String titulo){
-        List<PeliculaResponse> peliculas = pelisServicioImpl.findPeliculaByName(titulo);
-        return new ResponseEntity<List<PeliculaResponse>>(peliculas, HttpStatus.OK);
+    public ResponseEntity<List<MovieResponse>> findMoviesByName(@PathVariable("titulo") String titulo){
+        List<MovieResponse> peliculas = pelisServicioImpl.findMoviesByName(titulo);
+        return new ResponseEntity<List<MovieResponse>>(peliculas, HttpStatus.OK);
     }
 
     @GetMapping(value="/buscarPorTexto/{texto}")
-    public ResponseEntity<List<PeliculaResponse>> consultarPorTexto(@PathVariable("texto") String texto){
-        List<PeliculaResponse> peliculas = pelisServicioImpl.findPeliculaByTexto(texto);
-        return new ResponseEntity<List<PeliculaResponse>>(peliculas, HttpStatus.OK);
+    public ResponseEntity<List<MovieResponse>> findMoviesByText(@PathVariable("texto") String texto){
+        List<MovieResponse> peliculas = pelisServicioImpl.findMoviesByText(texto);
+        return new ResponseEntity<List<MovieResponse>>(peliculas, HttpStatus.OK);
     }
 
 }

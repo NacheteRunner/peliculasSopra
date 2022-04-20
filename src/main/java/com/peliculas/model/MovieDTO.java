@@ -1,24 +1,35 @@
-package com.peliculas.modelo;
+package com.peliculas.model;
 
-public class PeliculaResponse {
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-    private int id;
+public class MovieDTO implements Serializable {
+    // En principio estamos trabajando solo con una entidad, quedaria la clase igual
 
+
+    @NotEmpty
+    @NotBlank
     private String titulo;
-
+    @NotEmpty
+    @NotBlank
     private String genero;
-
+    @NotNull
+    @Min(1800)
     private int anno;
 
     private int num_oscar;
-
+    @NotEmpty
+    @NotBlank
     private String actores;
 
-    public PeliculaResponse(){
+    public MovieDTO(){
 
     }
 
-    public PeliculaResponse(String titulo, String genero, int anno, int num_oscar, String actores) {
+    public MovieDTO(String titulo, String genero, int anno, int num_oscar, String actores) {
         this.titulo = titulo;
         this.genero = genero;
         this.anno = anno;
@@ -28,14 +39,6 @@ public class PeliculaResponse {
 
     public String getTitulo() {
         return titulo;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setTitulo(String titulo) {
@@ -76,8 +79,8 @@ public class PeliculaResponse {
 
     @Override
     public String toString() {
-        return "PeliculaResponse{" +
-                "id=" + id +
+        return "PeliculaDTO{" +
+                //"id=" + id +
                 ", titulo='" + titulo + '\'' +
                 ", genero='" + genero + '\'' +
                 ", anno=" + anno +
