@@ -1,21 +1,23 @@
-package com.scaffolding.scaffolding.modelo;
+package com.peliculas.modelo;
 
 import javax.persistence.Column;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 public class PeliculaDTO implements Serializable {
     // En principio estamos trabajando solo con una entidad, quedaria la clase igual
 
-    //private int id;
 
+    @NotEmpty
     private String titulo;
-
+    @NotEmpty
     private String genero;
-
+    @NotEmpty
     private int anno;
 
     private int num_oscar;
-
+    @NotEmpty
     private String actores;
 
     public PeliculaDTO(){
@@ -33,14 +35,6 @@ public class PeliculaDTO implements Serializable {
     public String getTitulo() {
         return titulo;
     }
-
-    /*public int getId() {
-        return id;
-    }*/
-
-    /*public void setId(int id) {
-        this.id = id;
-    }*/
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;

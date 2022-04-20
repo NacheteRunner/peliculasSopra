@@ -1,7 +1,7 @@
-package com.scaffolding.scaffolding.repositorios;
+package com.peliculas.repositorios;
 
 
-import com.scaffolding.scaffolding.modelo.PeliculaEntity;
+import com.peliculas.modelo.PeliculaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,13 +1,11 @@
-package com.scaffolding.scaffolding.servicios;
+package com.peliculas.servicios;
 
-import com.scaffolding.scaffolding.modelo.PeliculaDTO;
-import com.scaffolding.scaffolding.modelo.PeliculaEntity;
-import com.scaffolding.scaffolding.modelo.PeliculaResponse;
+import com.peliculas.modelo.PeliculaDTO;
+import com.peliculas.modelo.PeliculaResponse;
+import com.peliculas.modelo.PeliculaEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import com.scaffolding.scaffolding.repositorios.PelisRepositorio;
+import com.peliculas.repositorios.PelisRepositorio;
 
 import java.util.*;
 
@@ -21,7 +19,7 @@ public class PelisServicioImpl implements PelisServicio {
     // METODO INSERTAR
     public PeliculaResponse addPelicula (PeliculaDTO peliculaDTO) {
         PeliculaEntity peliculaEntity = convertDTOToEntity(peliculaDTO);
-        pelisRepositorio.save(peliculaEntity);
+        peliculaEntity = pelisRepositorio.save(peliculaEntity);  //Cambio Oriol
         PeliculaResponse peliculaResponse = convertEntityToResponse(peliculaEntity);
         return peliculaResponse;
     }

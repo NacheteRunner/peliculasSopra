@@ -1,8 +1,9 @@
-package com.scaffolding.scaffolding.servicios;
+package com.peliculas.servicios;
 
-import com.scaffolding.scaffolding.modelo.PeliculaEntity;
-import com.scaffolding.scaffolding.modelo.PeliculaResponse;
-import com.scaffolding.scaffolding.repositorios.PelisRepositorio;
+import com.peliculas.modelo.PeliculaEntity;
+import com.peliculas.modelo.PeliculaResponse;
+import com.peliculas.repositorios.PelisRepositorio;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.lenient;
 
 @ExtendWith(MockitoExtension.class)
-@SpringBootTest
+
 class PelisServicioImplTest {
 
     @Mock
@@ -50,7 +51,7 @@ class PelisServicioImplTest {
         peli.setTitulo("Todavia no se ha insertado ninguna pelicula");
         peliculasResponse.add(peli);
         Mockito.when(pelisRepositorio.findAll()).thenReturn(peliculasEntities);
-        assertEquals(pelisServicioImpl.listarPeliculas().get(0).getTitulo(),peliculasResponse.get(0).getTitulo());
+        Assertions.assertEquals(pelisServicioImpl.listarPeliculas().get(0).getTitulo(),peliculasResponse.get(0).getTitulo());
     }
 
     @Test
@@ -58,7 +59,7 @@ class PelisServicioImplTest {
         PeliculaEntity peli = creaPeli();
         // Estamos mockeando, simulando que el metodo findById del repositorio devuelve lo que tiene que devolver
         Mockito.when(pelisRepositorio.findById(1)).thenReturn(Optional.of(peli));
-        assertEquals(pelisServicioImpl.listarPeliculaPorId(1).getId(),peli.getId());
+        Assertions.assertEquals(pelisServicioImpl.listarPeliculaPorId(1).getId(),peli.getId());
     }
 
     @Test
@@ -68,7 +69,7 @@ class PelisServicioImplTest {
         peliResponse.setTitulo("No existe la pelicula con id "+ peli.getId());
         // Estamos mockeando, simulando que el metodo findById del repositorio devuelve lo que tiene que devolver
         Mockito.when(pelisRepositorio.findById(1)).thenReturn(Optional.empty());
-        assertEquals(pelisServicioImpl.listarPeliculaPorId(1).getTitulo(),peliResponse.getTitulo());
+        Assertions.assertEquals(pelisServicioImpl.listarPeliculaPorId(1).getTitulo(),peliResponse.getTitulo());
     }
 
     @Test
@@ -109,7 +110,7 @@ class PelisServicioImplTest {
         peliResponse.setTitulo("No existe ninguna pelicula buscando el termino: titanic");
         peliculasResponse.add(peliResponse);
         Mockito.when(pelisRepositorio.findAll()).thenReturn(peliculasEntities);
-        assertEquals(pelisServicioImpl.findPeliculaByTexto("titanic").get(0).getTitulo(),peliculasResponse.get(0).getTitulo());
+        Assertions.assertEquals(pelisServicioImpl.findPeliculaByTexto("titanic").get(0).getTitulo(),peliculasResponse.get(0).getTitulo());
     }
 
     public PeliculaEntity creaPeli(){

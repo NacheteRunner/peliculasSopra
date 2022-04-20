@@ -1,4 +1,4 @@
-package com.scaffolding.scaffolding.modelo;
+package com.peliculas.modelo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

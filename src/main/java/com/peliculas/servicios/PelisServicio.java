@@ -1,11 +1,9 @@
-package com.scaffolding.scaffolding.servicios;
+package com.peliculas.servicios;
 
-import com.scaffolding.scaffolding.modelo.PeliculaDTO;
-import com.scaffolding.scaffolding.modelo.PeliculaEntity;
-import com.scaffolding.scaffolding.modelo.PeliculaResponse;
+import com.peliculas.modelo.PeliculaDTO;
+import com.peliculas.modelo.PeliculaResponse;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface PelisServicio {
 

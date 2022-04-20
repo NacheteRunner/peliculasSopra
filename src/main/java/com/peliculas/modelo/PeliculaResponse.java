@@ -1,6 +1,7 @@
-package com.scaffolding.scaffolding.modelo;
+package com.peliculas.modelo;
 
 public class PeliculaResponse {
+
     private int id;
 
     private String titulo;
