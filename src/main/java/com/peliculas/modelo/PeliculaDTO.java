@@ -1,6 +1,8 @@
 package com.peliculas.modelo;
 
 import javax.persistence.Column;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -10,14 +12,18 @@ public class PeliculaDTO implements Serializable {
 
 
     @NotEmpty
+    @NotBlank
     private String titulo;
     @NotEmpty
+    @NotBlank
     private String genero;
-    @NotEmpty
+    @NotNull
+    @Min(1800)
     private int anno;
 
     private int num_oscar;
     @NotEmpty
+    @NotBlank
     private String actores;
 
     public PeliculaDTO(){
