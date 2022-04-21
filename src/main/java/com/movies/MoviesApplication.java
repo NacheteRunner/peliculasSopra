@@ -1,13 +1,13 @@
-package com.peliculas;
+package com.movies;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ScaffoldingApplication {
+public class MoviesApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ScaffoldingApplication.class, args);
+        SpringApplication.run(MoviesApplication.class, args);
     }
 
 }

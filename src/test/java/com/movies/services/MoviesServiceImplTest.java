@@ -1,8 +1,8 @@
-package com.peliculas.services;
+package com.movies.services;
 
-import com.peliculas.model.MovieEntity;
-import com.peliculas.model.MovieResponse;
-import com.peliculas.repository.MoviesRepository;
+import com.movies.model.MovieEntity;
+import com.movies.model.MovieResponse;
+import com.movies.repository.MoviesRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -47,10 +47,10 @@ class MoviesServiceImplTest {
         List<MovieEntity> moviesEntities = new ArrayList<MovieEntity>();
         List<MovieResponse> moviesResponse = new ArrayList<>();
         MovieResponse movie = new MovieResponse();
-        movie.setTitulo("Todavia no se ha insertado ninguna pelicula");
+        movie.setTitle("Todavia no se ha insertado ninguna pelicula");
         moviesResponse.add(movie);
         Mockito.when(moviesRepository.findAll()).thenReturn(moviesEntities);
-        Assertions.assertEquals(moviesServiceImpl.readMovies().get(0).getTitulo(),moviesResponse.get(0).getTitulo());
+        Assertions.assertEquals(moviesServiceImpl.readMovies().get(0).getTitle(),moviesResponse.get(0).getTitle());
     }
 
     @Test
@@ -65,10 +65,10 @@ class MoviesServiceImplTest {
     void readMoviesByIdNotPresent() {
         MovieEntity movie = makeMovie();
         MovieResponse movieResponse = new MovieResponse();
-        movieResponse.setTitulo("No existe la pelicula con id "+ movie.getId());
+        movieResponse.setTitle("No existe la pelicula con id "+ movie.getId());
         // Estamos mockeando, simulando que el metodo findById del repositorio devuelve lo que tiene que devolver
         Mockito.when(moviesRepository.findById(1)).thenReturn(Optional.empty());
-        Assertions.assertEquals(moviesServiceImpl.findMoviesById(1).getTitulo(),movieResponse.getTitulo());
+        Assertions.assertEquals(moviesServiceImpl.findMoviesById(1).getTitle(),movieResponse.getTitle());
     }
 
     @Test
@@ -76,7 +76,7 @@ class MoviesServiceImplTest {
         List<MovieEntity> moviesEntities = new ArrayList<>();
         List<MovieResponse> moviesResponse = new ArrayList<>();
         moviesEntities.add(makeMovie());
-        Mockito.when(moviesRepository.findByTitulo("Star Wars")).thenReturn(moviesEntities);
+        Mockito.when(moviesRepository.findByTitle("Star Wars")).thenReturn(moviesEntities);
         assertInstanceOf(moviesServiceImpl.findMoviesByName("Star Wars").getClass(),moviesResponse);
     }
 
@@ -85,9 +85,9 @@ class MoviesServiceImplTest {
         List<MovieEntity> moviesEntities = new ArrayList<>();
         List<MovieResponse> moviesResponse = new ArrayList<>();
         MovieResponse movie = new MovieResponse();
-        movie.setTitulo("No existe la pelicula de titulo "+ movie.getTitulo());
+        movie.setTitle("No existe la pelicula de titulo "+ movie.getTitle());
         moviesResponse.add(movie);
-        Mockito.when(moviesRepository.findByTitulo("Titanic")).thenReturn(moviesEntities);
+        Mockito.when(moviesRepository.findByTitle("Titanic")).thenReturn(moviesEntities);
         assertInstanceOf(moviesServiceImpl.findMoviesByName("Titanic").getClass(),moviesResponse);
     }
 
@@ -106,20 +106,20 @@ class MoviesServiceImplTest {
         List<MovieResponse> moviesResponse = new ArrayList<>();
         moviesEntities.add(makeMovie());
         MovieResponse movieResponse = new MovieResponse();
-        movieResponse.setTitulo("No existe ninguna pelicula buscando el termino: titanic");
+        movieResponse.setTitle("No existe ninguna pelicula buscando el termino: titanic");
         moviesResponse.add(movieResponse);
         Mockito.when(moviesRepository.findAll()).thenReturn(moviesEntities);
-        Assertions.assertEquals(moviesServiceImpl.findMoviesByText("titanic").get(0).getTitulo(),moviesResponse.get(0).getTitulo());
+        Assertions.assertEquals(moviesServiceImpl.findMoviesByText("titanic").get(0).getTitle(),moviesResponse.get(0).getTitle());
     }
 
     public MovieEntity makeMovie(){
         MovieEntity movie = new MovieEntity();
         movie.setId(1);
-        movie.setTitulo("Star Wars");
-        movie.setAnno(2021);
-        movie.setGenero("CienciaFicción");
-        movie.setActores("Harrison Ford, y otros");
-        movie.setnumOscar(2);
+        movie.setTitle("Star Wars");
+        movie.setYear(2021);
+        movie.setGender("CienciaFicción");
+        movie.setActors("Harrison Ford, y otros");
+        movie.setNumOscar(2);
         return movie;
     }
 }

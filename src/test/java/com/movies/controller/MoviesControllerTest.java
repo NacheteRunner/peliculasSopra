@@ -1,8 +1,8 @@
-package com.peliculas.controller;
+package com.movies.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.peliculas.model.MovieDTO;
-import com.peliculas.services.MoviesServiceImpl;
+import com.movies.model.MovieDTO;
+import com.movies.services.MoviesServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,11 +71,11 @@ class MoviesControllerTest {
 
     public MovieDTO makeMovie(){
         MovieDTO movie = new MovieDTO();
-        movie.setTitulo("Star Wars");
-        movie.setAnno(2021);
-        movie.setGenero("CienciaFicción");
-        movie.setActores("Harrison Ford, y otros");
-        movie.setnumOscar(2);
+        movie.setTitle("Star Wars");
+        movie.setYear(2021);
+        movie.setGender("CienciaFicción");
+        movie.setActors("Harrison Ford, y otros");
+        movie.setNumOscar(2);
         return movie;
     }
 

@@ -1,8 +1,8 @@
-package com.peliculas.controller;
+package com.movies.controller;
 
-import com.peliculas.model.MovieDTO;
-import com.peliculas.model.MovieResponse;
-import com.peliculas.services.MoviesServiceImpl;
+import com.movies.model.MovieDTO;
+import com.movies.model.MovieResponse;
+import com.movies.services.MoviesServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,38 +26,41 @@ public class MoviesController {
 
     @Autowired
 
-    private MoviesServiceImpl pelisServicioImpl;
+    private MoviesServiceImpl moviesServicioImpl;
 
     @Operation(summary = "Ver peliculas", description = "Sin parametros muestra un listado de todas las peliculas de la base de datos, o busca por titulo, " +
             "id, o un texto determinado en cualquier campo de la pelicula ", method = "GET")
     @GetMapping(value="/listar")
     public ResponseEntity<List<MovieResponse>> readMovies(){
-       List<MovieResponse> peliculas = pelisServicioImpl.readMovies();
+       List<MovieResponse> peliculas = moviesServicioImpl.readMovies();
         return new ResponseEntity<List<MovieResponse>>(peliculas, HttpStatus.OK);
     }
 
+    @Operation(summary = "Buscar pelicula por id", description = "Busca una pelicula por su id", method = "GET")
     @GetMapping(value="/buscarPorId/{id}")
     public ResponseEntity<MovieResponse> findMoviesById(@PathVariable("id") int id){
-        MovieResponse movieResponse = pelisServicioImpl.findMoviesById(id);
+        MovieResponse movieResponse = moviesServicioImpl.findMoviesById(id);
         return new ResponseEntity<MovieResponse>(movieResponse, HttpStatus.OK);
     }
 
     @Operation(summary = "Insertar película", description = "Inserta una pelicula en la base de datos", method = "POST")
     @PostMapping(value="/insertar")
     public ResponseEntity<MovieResponse> addMovie (@Valid @RequestBody MovieDTO movieDTOInsertar){
-        MovieResponse movieResponse = pelisServicioImpl.addMovie(movieDTOInsertar);
+        MovieResponse movieResponse = moviesServicioImpl.addMovie(movieDTOInsertar);
         return ResponseEntity.ok(movieResponse);
     }
 
+    @Operation(summary = "Buscar pelicula por titulo", description = "Busca una pelicula por su titulo", method = "GET")
     @GetMapping(value="/buscarPorTitulo/{titulo}")
     public ResponseEntity<List<MovieResponse>> findMoviesByName(@PathVariable("titulo") String titulo){
-        List<MovieResponse> peliculas = pelisServicioImpl.findMoviesByName(titulo);
+        List<MovieResponse> peliculas = moviesServicioImpl.findMoviesByName(titulo);
         return new ResponseEntity<List<MovieResponse>>(peliculas, HttpStatus.OK);
     }
 
+    @Operation(summary = "Buscar por texto en cualquier campo", description = "Busca un texto en cualquier campo de la pelicula", method = "GET")
     @GetMapping(value="/buscarPorTexto/{texto}")
     public ResponseEntity<List<MovieResponse>> findMoviesByText(@PathVariable("texto") String texto){
-        List<MovieResponse> peliculas = pelisServicioImpl.findMoviesByText(texto);
+        List<MovieResponse> peliculas = moviesServicioImpl.findMoviesByText(texto);
         return new ResponseEntity<List<MovieResponse>>(peliculas, HttpStatus.OK);
     }
 

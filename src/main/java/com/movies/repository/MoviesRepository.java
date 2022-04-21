@@ -1,13 +1,13 @@
-package com.peliculas.repository;
+package com.movies.repository;
 
 
-import com.peliculas.model.MovieEntity;
+import com.movies.model.MovieEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
 public interface MoviesRepository extends JpaRepository<MovieEntity, Integer> {
 
-    List<MovieEntity> findByTitulo(String titulo);
+    List<MovieEntity> findByTitle(String title);
 
 }
