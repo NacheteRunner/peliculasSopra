@@ -21,7 +21,7 @@ COPY src src
 RUN mvn package -Dmaven.test.skip=true
 
 FROM openjdk:11-jdk
-COPY --from=0 /build/target/MoviesApplication-SNAPSHOT.jar /app/target/MoviesApplication-SNAPSHOT.jar
+COPY --from=0 /build/target/movies-SNAPSHOT.jar /app/target/movies-SNAPSHOT.jar
 
 EXPOSE 8081
-ENTRYPOINT [ "java", "-jar", "/app/target/MoviesApplication-SNAPSHOT.jar", "--server.port=8081" ]
+ENTRYPOINT [ "java", "-jar", "/app/target/movies-SNAPSHOT.jar", "--server.port=8081" ]
