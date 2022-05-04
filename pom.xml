@@ -10,9 +10,9 @@
 	</parent>
 
 	<groupId>com.scaffolding</groupId>
-	<artifactId>scaffolding</artifactId>
+	<artifactId>movies</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>scaffolding</name>
+	<name>movies</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
