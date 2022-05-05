@@ -1,6 +1,8 @@
 # Chalenge1
 
-
+Repositorio creado para OpenShift, he añadido un DockerFile y un devfile.yaml. Funciona con el devfile, con el docker solo no consigo
+acceder a los endpoint de la api, puede ser algun problema de mapeo de puerto 8080 al 8081 de la api, no se. con el devfile como en
+el del ejemplo de Basic Spring boot funciona.
 
 ## Getting started
 
